@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Layout from "../components/layout/Layout";
+import Layout from '../components/Layout'
 
-export default function Home() {
-  return <Layout pageTitle="e-duquemos"></Layout>;
-}
+export default () => (
+  <Layout pageTitle="e-duquemos">
+  </Layout>
+)

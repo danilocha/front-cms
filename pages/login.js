@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import Layout from '../components/Layout'
 
-const Login = () => {
-  return <h2>Hola desde el login</h2>;
-};
-
-export default Login;
+export default () => (
+  <Layout pageTitle="Inicia sesion">
+    <h2>Hola desde el login</h2>
+  </Layout>
+)

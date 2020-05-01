@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react'
 import Head from 'next/head'
 import Nav from './Nav'
+import AuthProvider from '../../context'
 
-export default (props) => (
+export default ({ pageTitle, children }) => (
   <Fragment>
     <Head>
-      <title>{props.pageTitle}</title>
+      <title>{pageTitle}</title>
       <meta charSet="utf-8" />
       <link
         rel="stylesheet"
@@ -17,10 +18,10 @@ export default (props) => (
 
     </Head>
 
+    <AuthProvider>
+      <Nav />
 
-    <Nav />
-
-
-    <main>{props.children}</main>
+      <main>{children}</main>
+    </AuthProvider>
   </Fragment>
 )

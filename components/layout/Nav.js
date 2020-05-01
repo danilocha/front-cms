@@ -4,21 +4,21 @@ export default () => (
   <Fragment>
     <nav className="grey darken-4">
       <div className="nav-wrapper container ">
-        <a href="#!" className="brand-logo">
+        <a href="/" className="brand-logo">
           E-ducando
           </a>
-        <a href="#!" data-target="mobile-demo" className="sidenav-trigger">
+        {/* <a href="#!" data-target="mobile-demo" className="sidenav-trigger">
           <i className="material-icons">menu</i>
-        </a>
+        </a> */}
         <ul className="right hide-on-med-and-down">
           <li>
-            <a href="#!">Mi perfil</a>
+            <a href="/perfil">Mi perfil</a>
           </li>
           <li>
-            <a href="#!">Articulos</a>
+            <a href="/articulos/nuevo">Articulos</a>
           </li>
           <li>
-            <a href="#!">Crear usuario</a>
+            <a href="/usuarios">Crear usuario</a>
           </li>
           <li>
             <a href="#!">Cerrar sesion</a>
@@ -26,7 +26,7 @@ export default () => (
         </ul>
       </div>
     </nav>
-    <ul className="sidenav" id="mobile-demo">
+    {/* <ul className="sidenav" id="mobile-demo">
       <li>
         <a href="sass.html">Sass</a>
       </li>
@@ -39,6 +39,6 @@ export default () => (
       <li>
         <a href="mobile.html">Mobile</a>
       </li>
-    </ul>
+    </ul> */}
   </Fragment>
 )

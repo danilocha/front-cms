@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import Head from 'next/head'
 import Nav from './Nav'
-import AuthProvider from '../../context'
 
 export default ({ pageTitle, children }) => (
   <Fragment>
@@ -18,10 +17,8 @@ export default ({ pageTitle, children }) => (
 
     </Head>
 
-    <AuthProvider>
-      <Nav />
+    <Nav />
 
-      <main>{children}</main>
-    </AuthProvider>
+    <main>{children}</main>
   </Fragment>
 )

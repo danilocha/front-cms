@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Layout from '../components/Layout'
 
-export default () => (
-  <Layout pageTitle="Inicia sesion">
+import { AuthContext } from '../context'
+
+export default () => {
+
+  let { auth, token, updateTokenState, clienteAxios, loginOrlogoutAxios } = useContext(AuthContext)
+
+
+  return <Layout pageTitle="Inicia sesion">
 
     <div className="container">
       <h1 className="center">Bienvenido a E-ducando</h1>
@@ -20,4 +26,4 @@ export default () => (
       </form>
     </div>
   </Layout>
-)
+}

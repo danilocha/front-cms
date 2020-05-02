@@ -1,21 +1,26 @@
 import React, { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
 
-export const { Provider, Consumer } = createContext()
+const AuthContext = createContext()
 
 
-export default ({ children }) => {
+const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState(false)
     const [token, setToken] = useState()
 
 
     const updateTokenState = (token) => token || token !== null ? setToken(token) : setToken()
 
+
     const clienteAxios = axios.create({
-        baseURL: process.env.REACT_APP_EDUCAPI_URL,
+        baseURL: 'http://localhost:5000/api',
         headers: {
             'x-auth-token': token,
         }
+    })
+
+    const loginOrlogoutAxios = axios.create({
+        baseURL: 'http://localhost:5000/api',
     })
 
     const tokenState = () => {
@@ -29,7 +34,9 @@ export default ({ children }) => {
     }, [token, auth])
 
 
-    return <Provider value={{ auth, token, updateTokenState, clienteAxios }}>
+    return (<AuthContext.Provider value={{ auth, token, updateTokenState, clienteAxios, loginOrlogoutAxios }}>
         {children}
-    </Provider>
+    </AuthContext.Provider>)
 }
+
+export { AuthProvider, AuthContext }

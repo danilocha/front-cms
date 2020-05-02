@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState()
 
 
-    const updateTokenState = (token) => token || token !== null ? setToken(token) : setToken()
+    const updateTokenState = (token) => token ? setToken(token) : setToken()
 
 
     const clienteAxios = axios.create({
@@ -24,9 +24,19 @@ const AuthProvider = ({ children }) => {
     })
 
     const tokenState = () => {
-        let token = localStorage.getItem('token')
-        if (!token || token !== null) setAuth(true)
-        setToken(token)
+        if (localStorage.getItem('token') !== null) {
+            let tokenValue = localStorage.getItem('token')
+            setAuth(true)
+            return setToken(tokenValue)
+        }
+        if (token) {
+            setAuth(true)
+            return setToken(token)
+        }
+        if (!token) {
+            setAuth(false)
+            return setToken()
+        }
     }
 
     useEffect(() => {

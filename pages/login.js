@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import Swal from 'sweetalert2'
 
@@ -6,15 +7,18 @@ import { AuthContext } from '../context'
 
 export default () => {
 
-  let { auth, token, updateTokenState, clienteAxios, loginOrlogoutAxios } = useContext(AuthContext)
+  let { updateTokenState, loginOrlogoutAxios, auth } = useContext(AuthContext)
+
   const [credenciales, guardarCredenciales] = useState({})
+
+  const router = useRouter()
 
   const iniciarSesion = async e => {
     e.preventDefault();
     try {
-      const respuesta = await loginOrlogoutAxios.post('login', credenciales)
-      updateTokenState(respuesta.data.token)
-      console.log(token)
+      const { data } = await loginOrlogoutAxios.post('login', credenciales)
+      updateTokenState(data.token)
+      localStorage.setItem('token', JSON.stringify(data.token))
     } catch (error) {
       console.log(error)
       Swal.fire({
@@ -31,6 +35,8 @@ export default () => {
       [e.target.name]: e.target.value
     })
   }
+
+  if (auth) return router.push('/')
 
 
   return <Layout pageTitle="Inicia sesion">

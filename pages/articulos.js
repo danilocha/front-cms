@@ -7,11 +7,14 @@ import { AuthContext } from '../context'
 
 const Articulos = () => {
 
-    let { auth } = useContext(AuthContext)
+    let { auth, token } = useContext(AuthContext)
 
     const router = useRouter()
 
-    if (!auth) return router.push('/login')
+    useEffect(() => {
+        console.log(auth, token)
+        if (!auth && localStorage.getItem('token') === null) router.push('/login')
+    }, [token, auth])
 
     return (
         <Layout>

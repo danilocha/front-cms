@@ -11,7 +11,7 @@ const Perfil = () => {
     const router = useRouter()
 
     useEffect(() => {
-        if (!auth && localStorage.getItem('token') === null) return router.push('/login')
+        if (!auth && localStorage.getItem('token') === null) router.push('/login')
     }, [token])
 
     return (

@@ -1,7 +1,19 @@
-import React from 'react';
-import Layout from '../components/layout';
+import React, { useContext, useEffect } from 'react'
+import Layout from '../components/layout'
+import { useRouter } from 'next/router'
+import { AuthContext } from '../context'
 
 const Usuarios = () => {
+
+    let { auth, token } = useContext(AuthContext)
+
+    const router = useRouter()
+
+    useEffect(() => {
+        console.log(auth, token)
+        if (!auth && localStorage.getItem('token') === null) router.push('/login')
+    }, [token, auth])
+
     return (
         <Layout>
             <div className="container">

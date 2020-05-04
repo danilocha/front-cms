@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import Swal from 'sweetalert2'
@@ -7,7 +7,7 @@ import { AuthContext } from '../context'
 
 export default () => {
 
-  let { updateTokenState, loginOrlogoutAxios, auth } = useContext(AuthContext)
+  let { updateTokenState, loginOrlogoutAxios, auth, token } = useContext(AuthContext)
 
   const [credenciales, guardarCredenciales] = useState({})
 
@@ -21,7 +21,6 @@ export default () => {
       updateTokenState(data.token)
       localStorage.setItem('token', JSON.stringify(data.token))
       localStorage.setItem('id', JSON.stringify(data.id))
-
     } catch (error) {
       console.log(error)
       Swal.fire({
@@ -39,7 +38,7 @@ export default () => {
     })
   }
 
-  if (auth) return router.push('/')
+  if (auth && token) router.push('/')
 
 
   return <Layout pageTitle="Inicia sesion">

@@ -1,7 +1,19 @@
-import React from 'react';
-import Categorias from './Categoria';
+import React, { useContext, useEffect } from 'react'
+import Categorias from './Categoria'
+import { useRouter } from 'next/router'
+import { AuthContext } from '../../context'
 
 const FormArticulo = () => {
+
+    let { auth, token } = useContext(AuthContext)
+
+    const router = useRouter()
+
+    useEffect(() => {
+        console.log(auth, token)
+        if (!auth && localStorage.getItem('token') === null) router.push('/login')
+    }, [token, auth])
+
     return (
         <form>
             <div className="container row">

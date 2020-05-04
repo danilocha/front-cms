@@ -9,8 +9,9 @@ export default () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (!auth && localStorage.getItem('token') === null) return router.push('/login')
-  }, [token])
+    console.log(auth, token)
+    if (!auth && localStorage.getItem('token') === null) router.push('/login')
+  }, [token, auth])
 
   return (
     <Layout pageTitle="e-ducando">

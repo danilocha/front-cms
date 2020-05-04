@@ -1,7 +1,29 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react'
+import Swal from 'sweetalert2'
+import { AuthContext } from '../../context'
 
-export default () => (
-  <Fragment>
+export default () => {
+
+  let { token, loginOrlogoutAxios, updateTokenState, auth } = useContext(AuthContext)
+
+  let id
+
+  useEffect(() => {
+    id = localStorage.getItem('token')
+  }, [token])
+
+  const finalizarSesion = async e => {
+    e.preventDefault();
+    try {
+      await loginOrlogoutAxios.post('logout', { token: id })
+      updateTokenState()
+      localStorage.removeItem('token')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return <Fragment>
     <nav className="grey darken-4">
       <div className="nav-wrapper container ">
         <a href="/" className="brand-logo">
@@ -20,9 +42,9 @@ export default () => (
           <li>
             <a href="/usuarios">Crear usuario</a>
           </li>
-          <li>
-            <a href="#!">Cerrar sesion</a>
-          </li>
+          {auth && <li>
+            <a onClick={finalizarSesion} href="#!">Cerrar sesion</a>
+          </li>}
         </ul>
       </div>
     </nav>
@@ -41,4 +63,4 @@ export default () => (
       </li>
     </ul> */}
   </Fragment>
-)
+}

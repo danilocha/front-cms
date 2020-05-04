@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
         if (!token) {
             setAuth(false)
             setId(null)
-            return setToken(null)
+            return setToken()
         }
     }
 

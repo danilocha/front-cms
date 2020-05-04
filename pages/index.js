@@ -7,14 +7,10 @@ export default () => {
   let { auth, token } = useContext(AuthContext)
 
   const router = useRouter()
-  console.log(token)
 
   useEffect(() => {
-    if (!auth) {
-      if (!token || token === null) return router.push('/login')
-    }
-  }, [])
-
+    if (!auth && localStorage.getItem('token') === null) return router.push('/login')
+  }, [token])
 
   return (
     <Layout pageTitle="e-ducando">

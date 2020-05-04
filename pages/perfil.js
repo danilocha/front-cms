@@ -1,6 +1,19 @@
-import React from 'react';
-import Layout from '../components/layout'
+import React, { useContext, useEffect } from 'react'
+import Layout from '../components/Layout'
+import { useRouter } from 'next/router'
+import { AuthContext } from '../context'
+
+
 const Perfil = () => {
+
+    let { auth, token } = useContext(AuthContext)
+
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!auth && localStorage.getItem('token') === null) return router.push('/login')
+    }, [token])
+
     return (
         <Layout pageTitle="Editar perfil">
             <div className="container">

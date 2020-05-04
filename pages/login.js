@@ -11,6 +11,7 @@ export default () => {
 
   const [credenciales, guardarCredenciales] = useState({})
 
+
   const router = useRouter()
 
   const iniciarSesion = async e => {
@@ -19,6 +20,8 @@ export default () => {
       const { data } = await loginOrlogoutAxios.post('login', credenciales)
       updateTokenState(data.token)
       localStorage.setItem('token', JSON.stringify(data.token))
+      localStorage.setItem('id', JSON.stringify(data.id))
+
     } catch (error) {
       console.log(error)
       Swal.fire({

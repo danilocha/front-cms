@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context'
 
-import clienteAxios from '../../config/axios'
 import FormCategorias from './formCategorias';
 const Categorias = () => {
+    let { clienteAxios } = useContext(AuthContext)
 
     const [categorias, guardarCategorias] = useState([])
 

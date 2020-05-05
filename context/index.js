@@ -17,11 +17,10 @@ const AuthProvider = ({ children }) => {
 
     const updateTokenState = (token) => token ? setToken(token) : setToken()
 
-
     const clienteAxios = axios.create({
         baseURL: 'http://localhost:5000/api',
         headers: {
-            'x-auth-token': token,
+            'x-auth-token': token
         }
     })
 

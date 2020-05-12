@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react'
 import Swal from 'sweetalert2'
+import Link from 'next/link'
 import { AuthContext } from '../../context'
 
 export default () => {
@@ -34,13 +35,13 @@ export default () => {
         </a> */}
         <ul className="right hide-on-med-and-down">
           <li>
-            <a href="/perfil">Mi perfil</a>
+            <Link href="/perfil"><a>Mi perfil</a></Link>
           </li>
           <li>
-            <a href="/articulos/nuevo">Articulos</a>
+            <Link href="/articulos/nuevo"><a>Articulos</a></Link>
           </li>
           <li>
-            <a href="/usuarios">Crear usuario</a>
+            <Link href="/usuarios"><a>{auth && token ? 'Editar usario' : 'Crear usuario'}</a></Link>
           </li>
           {auth && <li>
             <a onClick={finalizarSesion} href="#!">Cerrar sesion</a>

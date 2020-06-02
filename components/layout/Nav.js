@@ -38,7 +38,7 @@ export default () => {
             <Link href="/perfil"><a>Mi perfil</a></Link>
           </li>
           <li>
-            <Link href="/articulos/nuevo"><a>Articulos</a></Link>
+            <Link href="/articulos"><a>Articulos</a></Link>
           </li>
           <li>
             <Link href="/usuarios"><a>{auth && token ? 'Editar usario' : 'Crear usuario'}</a></Link>

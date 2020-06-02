@@ -1,31 +1,35 @@
-import React, { Component } from 'react'
-import { EditorState } from 'draft-js';
-import dynamic from 'next/dynamic'
-const Editor = dynamic(
-    () => {
-        return import('react-draft-wysiwyg').then((mod) => mod.Editor);
-    },
-    { loading: () => null, ssr: false },
-);
+import React, { Component } from 'react';
+import { EditorState, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+
+
 class MyEditor extends Component {
+    state = {
+        editorState: EditorState.createEmpty(),
+    }
+
+    onEditorStateChange = (editorState) => {
+        this.setState({
+            editorState,
+        });
+    };
 
     render() {
-
+        const { editorState } = this.state;
         return (
-            <Editor
-                toolbar={{
-                    image: {
-                        uploadEnabled: true,
-                        previewImage: true
-                    }
-                }}
+            <div>
+                <Editor
 
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
-                onEditorStateChange={this.props.guardarContArticulo}
-            />
-        )
+                    wrapperClassName="demo-wrapper"
+                    editorClassName="demo-editor"
+                    onEditorStateChange={this.props.guardarContArticulo}
+                />
+
+            </div>
+        );
     }
 }
 
-export default MyEditor;
+export default MyEditor

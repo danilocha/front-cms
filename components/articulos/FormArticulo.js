@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 
 import MyEditor from './MyEditor'
+import draftToHtml from 'draftjs-to-html';
+import { convertToRaw } from 'draft-js';
 
 import Categorias from './Categoria'
 import { useRouter } from 'next/router'
 import { AuthContext } from '../../context'
 
-const FormArticulo = () => {
+const FormArticulo = ({ editar, contEditArticulo }) => {
 
     let { auth, token, loginOrlogoutAxios, id } = useContext(AuthContext)
     const [articulo, guardarArticulo] = useState({
@@ -15,16 +17,19 @@ const FormArticulo = () => {
         categoria: ''
     })
     const [contArticulo, guardarContArticulo] = useState([])
+
     const [archivo, guardarArchivo] = useState('')
 
     const subirArticulo = async e => {
         e.preventDefault();
+        console.log(contArticulo)
         const formData = new FormData();
         formData.append("titulo", articulo.title)
         formData.append("categoria", articulo.categoria)
-        formData.append("contenido", contArticulo)
+        formData.append("contenido", draftToHtml(convertToRaw(contArticulo.getCurrentContent())))
         formData.append("imagen", archivo)
         formData.append("autor", JSON.parse(id))
+        formData.append("public", false)
         console.log(formData)
 
         try {
@@ -34,6 +39,7 @@ const FormArticulo = () => {
                     'x-auth-token': JSON.parse(token)
                 }
             });
+
 
 
             if (res.status === 200) {
@@ -67,15 +73,24 @@ const FormArticulo = () => {
 
     const router = useRouter()
 
-    useEffect(() => {
+    // const traerArticulo = async () => {
+    //     const res = await loginOrlogoutAxios.get(`/articles/edit/${editar}`);
+    //     const cont = res.data[0]
+    //     guardarContEditArticulo(cont.contenido)
+    // }
+    // traerArticulo()
 
+
+    useEffect(() => {
         if (!auth && localStorage.getItem('token') === null) router.push('/login')
     }, [token, auth])
+
+    const titulo = editar ? `Editar articulo ${editar}` : "Nuevo articulo";
 
     return (
         <form onSubmit={subirArticulo}>
             <div className="container row">
-                <h2>Nuevo articulo</h2>
+                <h2>{titulo}</h2>
                 <div className="input-field col s12">
                     <input placeholder="Titulo" name="title" onChange={obtenerInformacion} type="text" className="validate" />
 
@@ -92,7 +107,7 @@ const FormArticulo = () => {
 
                 <div className="col s10">
                     <h4>Articulo</h4>
-                    <MyEditor guardarContArticulo={guardarContArticulo} art />
+                    <MyEditor guardarContArticulo={guardarContArticulo} contEditArticulo={contEditArticulo} />
 
                 </div>
                 <Categorias obtenerInformacion={obtenerInformacion} contArticulo={contArticulo} />

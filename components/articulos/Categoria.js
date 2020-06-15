@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context'
 
-import FormCategorias from './formCategorias';
+import FormCategorias from './FormCategorias';
 const Categorias = ({ obtenerInformacion }) => {
     let { token, loginOrlogoutAxios } = useContext(AuthContext)
 

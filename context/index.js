@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
-
+import API from '../next.config'
 
 
 
@@ -18,14 +18,14 @@ const AuthProvider = ({ children }) => {
     const updateTokenState = (token) => token ? setToken(token) : setToken()
 
     const clienteAxios = axios.create({
-        baseURL: 'http://localhost:5000/api',
+        baseURL: `${API.env.API}/api`,
         headers: {
             'x-auth-token': token
         }
     })
 
     const loginOrlogoutAxios = axios.create({
-        baseURL: 'http://localhost:5000/api',
+        baseURL: `${API.env.API}/api`,
     })
 
     const tokenState = () => {

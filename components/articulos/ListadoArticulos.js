@@ -1,4 +1,5 @@
 import React from 'react';
+import API from '../../next.config'
 import Link from 'next/link'
 import BtnPublicar from './BtnPublicar'
 import EliminarArticulo from './eliminarArticulo';
@@ -9,7 +10,7 @@ const ListadoArticulos = ({ articulos }) => {
             {articulos.map(articulo => (
                 <div className="card col m4">
                     <div className="card-image waves-effect waves-block waves-light">
-                        <img className="activator" src={`http://localhost:5000/${articulo.imagen}`} />
+                        <img className="activator" src={`${API.env.API}/${articulo.imagen}`} />
                     </div>
                     <div className="card-content">
                         <span className="card-title activator grey-text text-darken-4">{articulo.titulo}</span>

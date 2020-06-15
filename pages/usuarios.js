@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import { AuthContext } from '../context'

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import { useRouter } from 'next/router'
 import { AuthContext } from '../context'
-
 export default () => {
   const [users, setUsers] = useState([])
   let { auth, token, loginOrlogoutAxios, clienteAxios } = useContext(AuthContext)

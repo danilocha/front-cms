@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ListadoArticulos from '../components/articulos/ListadoArticulos'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 
 import { AuthContext } from '../context'
 
